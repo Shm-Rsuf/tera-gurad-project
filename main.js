@@ -23,8 +23,45 @@ const btnLeft = document.querySelector(".slider__btn--left");
 const btnRight = document.querySelector(".slider__btn--right");
 const dotContainer = document.querySelector(".dots");
 
-/*********Cookie*********/
+/***************Cookie*****************/
 cookieBody.addEventListener('click', function () {
   cookieBody.classList.add('hidden');
   cookieBody.style.bottom = '-12rem';
 })
+
+/***************Stick Nav & Nav's Height*****************/
+const navHeight = nav.getBoundingClientRect().height;
+
+function sticky(entries) {
+  const entry = entries[0];
+
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+}
+
+const headerObserver = new IntersectionObserver(sticky, {
+  root: null, //viewport
+  threshold: 0,
+  rootMargin: `-${navHeight}px`,
+});
+
+headerObserver.observe(header);
+
+/**************reveal section******************/
+function revealSection(entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+}
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,//viewport
+  threshold: 0.25,
+});
+
+allSections.forEach((section) => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
