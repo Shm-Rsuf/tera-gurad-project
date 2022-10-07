@@ -638,10 +638,11 @@ h4 {
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 60rem;
-  padding: 5rem 6rem;
+  padding: 3rem 4rem;
   box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
   z-index: 1000;
   transition: all 0.5s;
+  background-color: #f3f3f3;
 }
 
 .overlay {
@@ -657,7 +658,7 @@ h4 {
 }
 
 .modal__header {
-  font-size: 3.25rem;
+  font-size: 2.25rem;
   margin-bottom: 4.5rem;
   line-height: 1.5;
 }
@@ -671,12 +672,12 @@ h4 {
 }
 
 .modal__form label {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   font-weight: 500;
 }
 
 .modal__form input {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   padding: 1rem 1.5rem;
   border: 1px solid #ddd;
   border-radius: 0.5rem;
@@ -699,8 +700,8 @@ h4 {
   color: inherit;
   position: absolute;
   top: 0.5rem;
-  right: 2rem;
-  font-size: 4rem;
+  right: 1.5rem;
+  font-size: 3rem;
   cursor: pointer;
   border: none;
   background: none;
