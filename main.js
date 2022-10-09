@@ -205,16 +205,16 @@ document.addEventListener('keydown', (e) => {
 });
 
 /*********Tabbed Components***********/
-tabsContainer.addEventListener('click', (e) => {
-  const btn = e.target.closest('operations__tab');
+tabsContainer.addEventListener('click', function (e) {
+  const btn = e.target.closest('.operations__tab');
 
   if (!btn) return;
 
-  tabs.forEach((tab) => tab.classList.remove('operation__tab--active'));
+  tabs.forEach((tab) => tab.classList.remove('operations__tab--active'));
 
   tabsContent.forEach((content) => content.classList.remove('operations__content--active'));
 
-  btn.classList.add('operation__content--active');
+  btn.classList.add('operations__tab--active');
 
   document
     .querySelector(`.operations__content--${btn.dataset.tab}`)
