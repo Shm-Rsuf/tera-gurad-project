@@ -146,6 +146,7 @@ imgTargets.forEach((img) => imgObserver.observe(img));
 let currentSlide = 0;
 let maxSlide = slides.length - 1;
 
+/*---------Dots-------*/
 function creatingDots() {
   slides.forEach((_, i) => {
     const dot = `<button class='dots__dot' data-slide='${i}'></button>`;
@@ -154,25 +155,64 @@ function creatingDots() {
 }
 creatingDots();
 
-function changeSlide(cs) {
+/*--------Active Dots---------*/
+function activateDots(slide) {
+  document.querySelectorAll('.dots__dot').forEach((dot) => dot.classList.remove('dots__dot--active'));
+}
+activateDots(0);
+
+function updateSlide(cs) {
   slides.forEach((sl, i) => {
     sl.style.transform = `translateX(${100 * (i - cs)}%)`;
   });
 }
-changeSlide(0);
+updateSlide(0);
 
 function previousSlide() {
   if (currentSlide === 0) currentSlide = maxSlide;
   else currentSlide--;
-  changeSlide(currentSlide);
+  updateSlide(currentSlide);
+  activateDots(currentSlide);
 }
 
 function nextslide() {
   if (currentSlide === maxSlide) currentSlide = 0;
   else currentSlide++;
-  changeSlide(currentSlide);
+  updateSlide(currentSlide);
+  activateDots(currentSlide);
 }
 
-/**************slider--Button Handler******************/
+/*--------dots handler---------*/
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    activateDots(e.target.dataset.slide);
+    updateSlide(e.target.dataset.slide);
+  }
+});
+
+/**************Button Handler******************/
 btnLeft.addEventListener('click', previousSlide);
 btnRight.addEventListener('click', nextslide);
+
+/*********Keybord***********/
+document.addEventListener('keydown', (e) => {
+  e.key === 'ArrowLeft' && previousSlide();
+  e.key === 'ArrowRight' && nextslide();
+});
+
+/*********Tabbed Components***********/
+tabsContainer.addEventListener('click', (e) => {
+  const btn = e.target.closest('operations__tab');
+
+  if (!btn) return;
+
+  tabs.forEach((tab) => tab.classList.remove('operation__tab--active'));
+
+  tabsContent.forEach((content) => content.classList.remove('operations__content--active'));
+
+  btn.classList.add('operation__content--active');
+
+  document
+    .querySelector(`.operations__content--${btn.dataset.tab}`)
+    .classList.add("operations__content--active");
+});

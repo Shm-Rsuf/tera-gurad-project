@@ -384,6 +384,8 @@ h4 {
 .operations__content--active {
   display: grid;
   grid-template-columns: 7rem 1fr;
+  column-gap: 3rem;
+  row-gap: 0.5;
 }
 
 .operations__header {
